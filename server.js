@@ -146,7 +146,7 @@ Be helpful, concise, and format your responses professionally.`;
       throw new Error(
         `Groq API error: ${response.status} - ${
           errorData.error?.message || "Unknown error"
-        }`
+        }`,
       );
     }
 
@@ -229,21 +229,21 @@ app.get(["/search-guide", "/search-guide.html"], (req, res) => {
 });
 app.get(["/borrow-return-guide", "/borrow-return-guide.html"], (req, res) => {
   res.sendFile(
-    path.join(__dirname, "views/landing-page/borrow-return-guide.html")
+    path.join(__dirname, "views/landing-page/borrow-return-guide.html"),
   );
 });
 app.get(["/reset-password-guide", "/reset-password-guide.html"], (req, res) => {
   res.sendFile(
-    path.join(__dirname, "views/landing-page/reset-password-guide.html")
+    path.join(__dirname, "views/landing-page/reset-password-guide.html"),
   );
 });
 app.get(
   ["/manage-borrowed-guide", "/manage-borrowed-guide.html"],
   (req, res) => {
     res.sendFile(
-      path.join(__dirname, "views/landing-page/manage-borrowed-guide.html")
+      path.join(__dirname, "views/landing-page/manage-borrowed-guide.html"),
     );
-  }
+  },
 );
 
 // Login pages
@@ -251,18 +251,18 @@ app.get(
   ["/login", "/login.html", "/login-index", "/login_index.html"],
   (req, res) => {
     res.sendFile(path.join(__dirname, "views/login/login_index.html"));
-  }
+  },
 );
 
 // Student & Librarian dashboards (public only for HTML, API protected separately)
 app.get(["/student-dashboard", "/student-dashboard.html"], (req, res) => {
   res.sendFile(
-    path.join(__dirname, "views/student-dashboard/student-dashboard.html")
+    path.join(__dirname, "views/student-dashboard/student-dashboard.html"),
   );
 });
 app.get(["/librarian-dashboard", "/librarian-dashboard.html"], (req, res) => {
   res.sendFile(
-    path.join(__dirname, "views/librarian-dashboard/librarian-dashboard.html")
+    path.join(__dirname, "views/librarian-dashboard/librarian-dashboard.html"),
   );
 });
 
