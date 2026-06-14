@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!response.ok) {
         console.error(
           "❌ Refresh token invalid or expired, status:",
-          response.status
+          response.status,
         );
 
         // Check if it's a true auth error or server error
@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/dashboard/total-books"
+        "/api/librarian/dashboard/total-books",
       );
       const data = await response.json();
       console.log("🔍 DIRECT API RESPONSE:", data);
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Also test the books endpoint
       const booksResponse = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/books"
+        "/api/librarian/books",
       );
       const booksData = await booksResponse.json();
       console.log("🔍 ALL BOOKS RESPONSE:", booksData);
@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       console.log("🔍 fetchTotalBooks called");
       const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/dashboard/total-books"
+        "/api/librarian/dashboard/total-books",
       );
 
       if (!response.ok) {
@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function fetchBooksIssued() {
     try {
       const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/dashboard/issued-books"
+        "/api/librarian/dashboard/issued-books",
       );
 
       if (!response.ok) {
@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function fetchOverdueBooks() {
     try {
       const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/dashboard/overdue-books"
+        "/api/librarian/dashboard/overdue-books",
       );
 
       if (!response.ok) {
@@ -293,7 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function fetchPendingRequests() {
     try {
       const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/dashboard/pending-requests"
+        "/api/librarian/dashboard/pending-requests",
       );
 
       if (!response.ok) {
@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function fetchFinesCollected() {
     try {
       const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/dashboard/fines-collected"
+        "/api/librarian/dashboard/fines-collected",
       );
 
       if (!response.ok) {
@@ -339,7 +339,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function fetchActiveUsers() {
     try {
       const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/dashboard/active-users"
+        "/api/librarian/dashboard/active-users",
       );
 
       if (!response.ok) {
@@ -366,7 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Test each endpoint individually first for debugging
       console.log("🔍 Testing total-books endpoint directly...");
       const totalBooksResponse = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/dashboard/total-books"
+        "/api/librarian/dashboard/total-books",
       );
       const totalBooksData = await totalBooksResponse.json();
       console.log("📊 TOTAL BOOKS RAW API RESPONSE:", totalBooksData);
@@ -374,13 +374,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       console.log("🔍 Testing books endpoint...");
       const booksResponse = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/books"
+        "/api/librarian/books",
       );
       const booksData = await booksResponse.json();
       console.log("📚 ALL BOOKS RAW API RESPONSE:", booksData);
       console.log(
         "📚 Actual books count from books endpoint:",
-        booksData.length
+        booksData.length,
       );
 
       // Fetch all metrics in parallel
@@ -416,10 +416,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const booksIssuedElement = document.getElementById("booksIssuedValue");
       const overdueBooksElement = document.getElementById("overdueBooksValue");
       const pendingRequestsElement = document.getElementById(
-        "pendingRequestsValue"
+        "pendingRequestsValue",
       );
       const finesCollectedElement = document.getElementById(
-        "finesCollectedValue"
+        "finesCollectedValue",
       );
       const activeUsersElement = document.getElementById("activeUsersValue");
 
@@ -427,42 +427,42 @@ document.addEventListener("DOMContentLoaded", () => {
         totalBooksElement.textContent = totalBooks.toLocaleString();
         console.log(
           "✅ Updated totalBooks element:",
-          totalBooksElement.textContent
+          totalBooksElement.textContent,
         );
       }
       if (booksIssuedElement) {
         booksIssuedElement.textContent = booksIssued.toLocaleString();
         console.log(
           "✅ Updated booksIssued element:",
-          booksIssuedElement.textContent
+          booksIssuedElement.textContent,
         );
       }
       if (overdueBooksElement) {
         overdueBooksElement.textContent = overdueBooks.toLocaleString();
         console.log(
           "✅ Updated overdueBooks element:",
-          overdueBooksElement.textContent
+          overdueBooksElement.textContent,
         );
       }
       if (pendingRequestsElement) {
         pendingRequestsElement.textContent = pendingRequests.toLocaleString();
         console.log(
           "✅ Updated pendingRequests element:",
-          pendingRequestsElement.textContent
+          pendingRequestsElement.textContent,
         );
       }
       if (finesCollectedElement) {
         finesCollectedElement.textContent = `₹${finesCollected.toLocaleString()}`;
         console.log(
           "✅ Updated finesCollected element:",
-          finesCollectedElement.textContent
+          finesCollectedElement.textContent,
         );
       }
       if (activeUsersElement) {
         activeUsersElement.textContent = activeUsers.toLocaleString();
         console.log(
           "✅ Updated activeUsers element:",
-          activeUsersElement.textContent
+          activeUsersElement.textContent,
         );
       }
 
@@ -495,9 +495,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       console.log("🔄 Making API request to /api/librarian/books");
-      const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/books"
-      );
+      const response = await makeAuthenticatedRequest("/api/librarian/books");
 
       console.log("🔄 Response status:", response.status);
 
@@ -554,9 +552,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const response = await makeAuthenticatedRequest(
-        `http://localhost:3500/api/librarian/books?search=${encodeURIComponent(
-          searchTerm
-        )}`
+        `/api/librarian/books?search=${encodeURIComponent(searchTerm)}`,
       );
 
       if (!response.ok) {
@@ -729,7 +725,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ✅ Get the submit button and disable it
     const submitBtn = document.querySelector(
-      '#issueBooksModal button[type="submit"]'
+      '#issueBooksModal button[type="submit"]',
     );
     const originalText = submitBtn ? submitBtn.textContent : "Issue Book";
 
@@ -751,14 +747,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // ✅ STEP 2: Make API request to direct issue endpoint
       const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/issues/issue",
+        "/api/librarian/issues/issue",
         {
           method: "POST",
           body: JSON.stringify({
             userId: userId,
             bookId: bookId,
           }),
-        }
+        },
       );
 
       console.log("📡 API Response status:", response.status);
@@ -855,11 +851,11 @@ document.addEventListener("DOMContentLoaded", () => {
   async function editBook(bookId, bookData) {
     try {
       const response = await makeAuthenticatedRequest(
-        `http://localhost:3500/api/librarian/books/${bookId}`,
+        `/api/librarian/books/${bookId}`,
         {
           method: "PUT",
           body: JSON.stringify(bookData),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -892,7 +888,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Get the return button
     const returnButton = document.querySelector(
-      `.return-book[data-book-id="${bookId}"]`
+      `.return-book[data-book-id="${bookId}"]`,
     );
     if (!returnButton) {
       console.error("❌ Return button not found for book:", bookId);
@@ -910,12 +906,12 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       console.log("🔍 Searching for approved book record...");
       const approvedResponse = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/issues/issue"
+        "/api/librarian/issues/issue",
       );
 
       if (!approvedResponse.ok) {
         throw new Error(
-          `Failed to fetch issued books: ${approvedResponse.status}`
+          `Failed to fetch issued books: ${approvedResponse.status}`,
         );
       }
 
@@ -926,12 +922,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const approvedRecord = approvedBooks.find(
         (book) =>
           book.bookId === bookId &&
-          (book.status === "issued" || book.status === "overdue")
+          (book.status === "issued" || book.status === "overdue"),
       );
 
       if (!approvedRecord) {
         throw new Error(
-          "No active issue record found for this book. It may already be returned."
+          "No active issue record found for this book. It may already be returned.",
         );
       }
 
@@ -956,10 +952,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       console.log("🌐 Calling return endpoint with ApprovedBook ID:", issueId);
       const response = await makeAuthenticatedRequest(
-        `http://localhost:3500/api/librarian/issues/${issueId}/return`,
+        `/api/librarian/issues/${issueId}/return`,
         {
           method: "PUT",
-        }
+        },
       );
 
       console.log("📡 API Response status:", response.status);
@@ -1017,9 +1013,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       console.log("Loading book details for:", bookId);
 
-      const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/books"
-      );
+      const response = await makeAuthenticatedRequest("/api/librarian/books");
       if (!response.ok) throw new Error("Failed to fetch books");
 
       const books = await response.json();
@@ -1065,10 +1059,10 @@ document.addEventListener("DOMContentLoaded", () => {
   async function removeBook(bookId) {
     try {
       const response = await makeAuthenticatedRequest(
-        `http://localhost:3500/api/librarian/books/${bookId}`,
+        `/api/librarian/books/${bookId}`,
         {
           method: "DELETE",
-        }
+        },
       );
 
       if (!response.ok) {
@@ -1101,7 +1095,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Show specific error message
       if (error.message.includes("Cannot delete issued book")) {
         alert(
-          "❌ Cannot delete issued book. Please return the book first, then delete it."
+          "❌ Cannot delete issued book. Please return the book first, then delete it.",
         );
       } else {
         alert("Error deleting book: " + error.message);
@@ -1123,7 +1117,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Get the return button
     const returnButton = document.querySelector(
-      `.return-book[data-book-id="${bookId}"]`
+      `.return-book[data-book-id="${bookId}"]`,
     );
     if (!returnButton) {
       console.error("❌ Return button not found for book:", bookId);
@@ -1142,12 +1136,12 @@ document.addEventListener("DOMContentLoaded", () => {
       // ✅ STEP 1: Find the active issue record for this book
       console.log("🔍 Searching for issued book record...");
       const approvedResponse = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/issued-books"
+        "/api/librarian/issued-books",
       );
 
       if (!approvedResponse.ok) {
         throw new Error(
-          `Failed to fetch issued books: ${approvedResponse.status}`
+          `Failed to fetch issued books: ${approvedResponse.status}`,
         );
       }
 
@@ -1177,10 +1171,10 @@ document.addEventListener("DOMContentLoaded", () => {
             bookId: b.bookId,
             status: b.status,
             id: b.id,
-          }))
+          })),
         );
         throw new Error(
-          "No active issue record found for this book. It may already be returned."
+          "No active issue record found for this book. It may already be returned.",
         );
       }
 
@@ -1204,10 +1198,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       console.log("🌐 Calling return endpoint with Issue ID:", issueRecord.id);
       const response = await makeAuthenticatedRequest(
-        `http://localhost:3500/api/librarian/issues/${issueRecord.id}/return`,
+        `/api/librarian/issues/${issueRecord.id}/return`,
         {
           method: "PUT",
-        }
+        },
       );
 
       console.log("📡 API Response status:", response.status);
@@ -1366,9 +1360,7 @@ document.addEventListener("DOMContentLoaded", () => {
       userTableBody.innerHTML =
         '<tr><td colspan="6" class="loading">Loading users...</td></tr>';
 
-      const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/users"
-      );
+      const response = await makeAuthenticatedRequest("/api/librarian/users");
 
       if (!response.ok) throw new Error("Failed to fetch users");
 
@@ -1477,9 +1469,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const response = await makeAuthenticatedRequest(
-        `http://localhost:3500/api/librarian/users?search=${encodeURIComponent(
-          searchTerm
-        )}`
+        `/api/librarian/users?search=${encodeURIComponent(searchTerm)}`,
       );
 
       if (!response.ok) {
@@ -1506,7 +1496,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       console.log("Sending to /register:", userData);
 
-      const response = await fetch("http://localhost:3500/register", {
+      const response = await fetch("/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -1686,7 +1676,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // ✅ STEP 1: Check if user has any issued books
       const issuedBooksResponse = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/issued-books"
+        "/api/librarian/issued-books",
       );
 
       if (!issuedBooksResponse.ok) {
@@ -1697,11 +1687,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const userIssuedBooks = allIssuedBooks.filter(
         (book) =>
           book.userId === userId &&
-          (book.status === "issued" || book.status === "overdue")
+          (book.status === "issued" || book.status === "overdue"),
       );
 
       console.log(
-        `📚 User ${userId} has ${userIssuedBooks.length} issued books`
+        `📚 User ${userId} has ${userIssuedBooks.length} issued books`,
       );
 
       if (userIssuedBooks.length > 0) {
@@ -1709,7 +1699,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const bookList = userIssuedBooks
           .map(
             (book) =>
-              `• ${book.bookTitle || "Unknown Book"} (Due: ${book.dueDate})`
+              `• ${book.bookTitle || "Unknown Book"} (Due: ${book.dueDate})`,
           )
           .join("\n");
 
@@ -1733,10 +1723,10 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log(`📚 Returning book: ${book.bookTitle}`);
 
             const returnResponse = await makeAuthenticatedRequest(
-              `http://localhost:3500/api/librarian/issues/${book._id}/return`,
+              `/api/librarian/issues/${book._id}/return`,
               {
                 method: "PUT",
-              }
+              },
             );
 
             if (!returnResponse.ok) {
@@ -1749,7 +1739,7 @@ document.addEventListener("DOMContentLoaded", () => {
           } catch (bookError) {
             console.error(
               `❌ Error returning book ${book.bookTitle}:`,
-              bookError
+              bookError,
             );
             // Continue with other books even if one fails
           }
@@ -1759,22 +1749,22 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("🔄 Checking and clearing user fines...");
         try {
           const finesResponse = await makeAuthenticatedRequest(
-            "http://localhost:3500/api/librarian/fines"
+            "/api/librarian/fines",
           );
 
           if (finesResponse.ok) {
             const allFines = await finesResponse.json();
             const userFines = allFines.filter(
-              (fine) => fine.userId === userId && fine.status === "overdue"
+              (fine) => fine.userId === userId && fine.status === "overdue",
             );
 
             for (const fine of userFines) {
               try {
                 const paidResponse = await makeAuthenticatedRequest(
-                  `http://localhost:3500/api/librarian/fines/${fine._id}/paid`,
+                  `/api/librarian/fines/${fine._id}/paid`,
                   {
                     method: "PUT",
-                  }
+                  },
                 );
 
                 if (paidResponse.ok) {
@@ -1798,10 +1788,10 @@ document.addEventListener("DOMContentLoaded", () => {
       // ✅ STEP 5: Delete the user
       console.log("🗑️ Deleting user account...");
       const deleteResponse = await makeAuthenticatedRequest(
-        `http://localhost:3500/api/librarian/users/${userId}`,
+        `/api/librarian/users/${userId}`,
         {
           method: "DELETE",
-        }
+        },
       );
 
       if (!deleteResponse.ok) {
@@ -1863,11 +1853,11 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("🔍 Hidden field element:", hiddenField);
       console.log(
         "🔍 Hidden field current value:",
-        hiddenField ? hiddenField.value : "NOT FOUND"
+        hiddenField ? hiddenField.value : "NOT FOUND",
       );
       console.log(
         "🔍 Hidden field HTML:",
-        hiddenField ? hiddenField.outerHTML : "ELEMENT NOT FOUND"
+        hiddenField ? hiddenField.outerHTML : "ELEMENT NOT FOUND",
       );
 
       // ✅ DEBUG: Check all form elements exist
@@ -1886,9 +1876,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       console.log("🌐 Making API request to fetch users...");
-      const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/users"
-      );
+      const response = await makeAuthenticatedRequest("/api/librarian/users");
 
       console.log("📡 API Response status:", response.status);
       console.log("📡 API Response ok:", response.ok);
@@ -1901,7 +1889,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("📋 All users fetched:", users.length);
       console.log(
         "📋 Users sample:",
-        users.slice(0, 3).map((u) => ({ id: u.id, name: u.name }))
+        users.slice(0, 3).map((u) => ({ id: u.id, name: u.name })),
       );
 
       const user = users.find((u) => u.id === userId);
@@ -1911,7 +1899,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("❌ User not found in API response");
         console.error(
           "🔍 Available user IDs:",
-          users.map((u) => u.id)
+          users.map((u) => u.id),
         );
         throw new Error(`User with ID "${userId}" not found`);
       }
@@ -1934,7 +1922,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const verifyHiddenField = document.getElementById("editUserId");
         console.log(
           "✅ Hidden field after setting:",
-          verifyHiddenField ? verifyHiddenField.value : "VERIFICATION FAILED"
+          verifyHiddenField ? verifyHiddenField.value : "VERIFICATION FAILED",
         );
       } else {
         console.error("❌ Hidden field not found - cannot set value!");
@@ -1992,7 +1980,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("🔄 Loading issued books...");
 
       const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/issued-books"
+        "/api/librarian/issued-books",
       );
 
       if (!response.ok) {
@@ -2014,7 +2002,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }).length;
 
       const overdue = issuedBooks.filter(
-        (book) => book.status === "overdue"
+        (book) => book.status === "overdue",
       ).length;
 
       // Update overview cards
@@ -2039,7 +2027,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Update the overview cards
     const overviewCards = document.querySelectorAll(
-      "#issuedBooks .overview-card"
+      "#issuedBooks .overview-card",
     );
     if (overviewCards.length >= 3) {
       overviewCards[0].querySelector("p").textContent = total;
@@ -2120,10 +2108,10 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("🌐 Processing issued book return for ID:", issueId);
 
       const response = await makeAuthenticatedRequest(
-        `http://localhost:3500/api/librarian/issues/${issueId}/return`,
+        `/api/librarian/issues/${issueId}/return`,
         {
           method: "PUT",
-        }
+        },
       );
 
       if (!response.ok) {
@@ -2140,7 +2128,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       alert(
         "✅ Book return processed successfully!" +
-          (result.emailSent ? "\n📧 Confirmation email sent." : "")
+          (result.emailSent ? "\n📧 Confirmation email sent." : ""),
       );
     } catch (error) {
       console.error("❌ Error processing return:", error);
@@ -2154,7 +2142,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("🔄 Loading pending requests...");
 
       const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/requests/pending" // ✅ CORRECT ENDPOINT
+        "/api/librarian/requests/pending", // ✅ CORRECT ENDPOINT
       );
 
       console.log("📡 Response status:", response.status);
@@ -2164,7 +2152,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const errorText = await response.text();
         console.error("❌ Server error response:", errorText);
         throw new Error(
-          `Failed to fetch pending requests: ${response.status} - ${errorText}`
+          `Failed to fetch pending requests: ${response.status} - ${errorText}`,
         );
       }
 
@@ -2218,14 +2206,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const booksResponse = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/books"
+        "/api/librarian/books",
       );
       if (booksResponse.ok) {
         booksData = await booksResponse.json();
       }
 
       const usersResponse = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/users"
+        "/api/librarian/users",
       );
       if (usersResponse.ok) {
         usersData = await usersResponse.json();
@@ -2258,7 +2246,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 user.name || `User ID: ${request.userId}`
               }</div>
               <div class="request-time">Requested: ${new Date(
-                request.requestDate || request.issueDate || Date.now()
+                request.requestDate || request.issueDate || Date.now(),
               ).toLocaleDateString()}</div>
             </div>
           </div>
@@ -2306,7 +2294,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "📋 request-id length:",
           e.target.dataset.requestId
             ? e.target.dataset.requestId.length
-            : "null"
+            : "null",
         );
 
         const requestId = e.target.dataset.requestId;
@@ -2339,11 +2327,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log(
       "✅ Total approve buttons found:",
-      document.querySelectorAll(".approve-btn").length
+      document.querySelectorAll(".approve-btn").length,
     );
     console.log(
       "✅ Total reject buttons found:",
-      document.querySelectorAll(".reject-btn").length
+      document.querySelectorAll(".reject-btn").length,
     );
     console.log("🔄 ========== END INITIALIZE REQUEST EVENTS ==========");
   }
@@ -2353,7 +2341,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("📥 Input requestId type:", typeof requestId);
     console.log(
       "📥 Input requestId length:",
-      requestId ? requestId.length : "null"
+      requestId ? requestId.length : "null",
     );
 
     if (!confirm("Are you sure you want to approve this request?")) {
@@ -2362,7 +2350,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const approveBtn = document.querySelector(
-      `.approve-btn[data-request-id="${requestId}"]`
+      `.approve-btn[data-request-id="${requestId}"]`,
     );
 
     console.log("🔍 Found approve button:", approveBtn);
@@ -2386,7 +2374,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Let's first check what data we have available
       const requestItem = document.querySelector(
-        `.request-item[data-request-id="${requestId}"]`
+        `.request-item[data-request-id="${requestId}"]`,
       );
       console.log("📋 Found request item:", requestItem);
 
@@ -2400,14 +2388,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       console.log(
         "🌐 Making API call to:",
-        `http://localhost:3500/api/librarian/requests/${requestId}/approve`
+        `/api/librarian/requests/${requestId}/approve`,
       );
 
       const response = await makeAuthenticatedRequest(
-        `http://localhost:3500/api/librarian/requests/${requestId}/approve`,
+        `/api/librarian/requests/${requestId}/approve`,
         {
           method: "PUT",
-        }
+        },
       );
 
       console.log("📡 API Response status:", response.status);
@@ -2426,7 +2414,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         throw new Error(
-          errorData?.message || `Failed to approve request: ${response.status}`
+          errorData?.message || `Failed to approve request: ${response.status}`,
         );
       }
 
@@ -2460,7 +2448,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const rejectBtn = document.querySelector(
-      `.reject-btn[data-request-id="${requestId}"]`
+      `.reject-btn[data-request-id="${requestId}"]`,
     );
     const originalText = rejectBtn.textContent;
 
@@ -2473,10 +2461,10 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Rejecting request:", requestId);
 
       const response = await makeAuthenticatedRequest(
-        `http://localhost:3500/api/librarian/requests/${requestId}/reject`, // ✅ CORRECT ENDPOINT
+        `/api/librarian/requests/${requestId}/reject`, // ✅ CORRECT ENDPOINT
         {
           method: "PUT",
-        }
+        },
       );
 
       if (!response.ok) {
@@ -2511,7 +2499,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("🔄 Loading returns data using issued books endpoint...");
 
       const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/issued-books"
+        "/api/librarian/issued-books",
       );
 
       if (!response.ok) {
@@ -2531,7 +2519,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }).length;
 
       const pendingReturns = issuedBooks.filter(
-        (book) => book.status === "issued"
+        (book) => book.status === "issued",
       ).length;
 
       const lateReturns = issuedBooks.filter((book) => {
@@ -2577,13 +2565,13 @@ document.addEventListener("DOMContentLoaded", () => {
               overdueDays: isLate
                 ? Math.ceil(
                     (new Date() - new Date(book.dueDate)) /
-                      (1000 * 60 * 60 * 24)
+                      (1000 * 60 * 60 * 24),
                   )
                 : 0,
               fineAmount: isLate
                 ? Math.ceil(
                     (new Date() - new Date(book.dueDate)) /
-                      (1000 * 60 * 60 * 24)
+                      (1000 * 60 * 60 * 24),
                   )
                 : 0,
             };
@@ -2683,7 +2671,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log(
       "✅ Returns list displayed with buttons:",
-      returnListContainer.querySelectorAll(".process-btn").length
+      returnListContainer.querySelectorAll(".process-btn").length,
     );
 
     // Add event listeners to process return buttons
@@ -2706,7 +2694,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!issueId || issueId === "undefined") {
           console.error("❌ No issue ID found in data attribute");
           alert(
-            "Error: Could not find the book issue record. Please refresh the page and try again."
+            "Error: Could not find the book issue record. Please refresh the page and try again.",
           );
           return;
         }
@@ -2722,13 +2710,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const returnItem = document.querySelector(
-        `.process-btn[data-issue-id="${issueId}"]`
+        `.process-btn[data-issue-id="${issueId}"]`,
       );
 
       if (!returnItem) {
         console.error("❌ Could not find return button for ID:", issueId);
         alert(
-          "Error: Could not find the return button. Please refresh the page."
+          "Error: Could not find the return button. Please refresh the page.",
         );
         return;
       }
@@ -2752,10 +2740,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       console.log("🌐 Making API call to return endpoint...");
       const response = await makeAuthenticatedRequest(
-        `http://localhost:3500/api/librarian/issues/${issueId}/return`,
+        `/api/librarian/issues/${issueId}/return`,
         {
           method: "PUT",
-        }
+        },
       );
 
       console.log("📡 API Response status:", response.status);
@@ -2792,7 +2780,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Re-enable button on error
       const returnItem = document.querySelector(
-        `.process-btn[data-issue-id="${issueId}"]`
+        `.process-btn[data-issue-id="${issueId}"]`,
       );
       if (returnItem) {
         returnItem.disabled = false;
@@ -2816,7 +2804,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Get the return button
     const returnButton = document.querySelector(
-      `.return-book[data-book-id="${bookId}"]`
+      `.return-book[data-book-id="${bookId}"]`,
     );
     if (!returnButton) {
       console.error("❌ Return button not found for book:", bookId);
@@ -2834,12 +2822,12 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       console.log("🔍 Searching for approved book record...");
       const approvedResponse = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/issued-books"
+        "/api/librarian/issued-books",
       );
 
       if (!approvedResponse.ok) {
         throw new Error(
-          `Failed to fetch issued books: ${approvedResponse.status}`
+          `Failed to fetch issued books: ${approvedResponse.status}`,
         );
       }
 
@@ -2850,12 +2838,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const approvedRecord = approvedBooks.find(
         (book) =>
           book.bookId === bookId &&
-          (book.status === "issued" || book.status === "overdue")
+          (book.status === "issued" || book.status === "overdue"),
       );
 
       if (!approvedRecord) {
         throw new Error(
-          "No active issue record found for this book. It may already be returned."
+          "No active issue record found for this book. It may already be returned.",
         );
       }
 
@@ -2875,10 +2863,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const issueId = approvedRecord._id;
       console.log("🌐 Calling return endpoint with ApprovedBook _id:", issueId);
       const response = await makeAuthenticatedRequest(
-        `http://localhost:3500/api/librarian/issues/${issueId}/return`,
+        `/api/librarian/issues/${issueId}/return`,
         {
           method: "PUT",
-        }
+        },
       );
 
       console.log("📡 API Response status:", response.status);
@@ -2950,7 +2938,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // First get all returns data using the same method as loadReturnsData
       const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/issued-books"
+        "/api/librarian/issued-books",
       );
 
       if (!response.ok) {
@@ -2989,12 +2977,12 @@ document.addEventListener("DOMContentLoaded", () => {
             status: isLate ? "late" : isDueToday ? "due-today" : "pending",
             overdueDays: isLate
               ? Math.ceil(
-                  (new Date() - new Date(book.dueDate)) / (1000 * 60 * 60 * 24)
+                  (new Date() - new Date(book.dueDate)) / (1000 * 60 * 60 * 24),
                 )
               : 0,
             fineAmount: isLate
               ? Math.ceil(
-                  (new Date() - new Date(book.dueDate)) / (1000 * 60 * 60 * 24)
+                  (new Date() - new Date(book.dueDate)) / (1000 * 60 * 60 * 24),
                 )
               : 0,
           };
@@ -3020,7 +3008,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Update summary with filtered counts
       const filteredData = {
         returnsToday: filteredReturns.filter(
-          (item) => item.status === "due-today"
+          (item) => item.status === "due-today",
         ).length,
         pendingReturns: filteredReturns.length,
         lateReturns: filteredReturns.filter((item) => item.status === "late")
@@ -3053,9 +3041,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("🔄 Loading fines data...");
 
       // Use the existing fines endpoint
-      const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/fines"
-      );
+      const response = await makeAuthenticatedRequest("/api/librarian/fines");
 
       console.log("📡 Fines API Response status:", response.status);
 
@@ -3072,7 +3058,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const totalUnpaid = unpaidFines.reduce(
         (sum, fine) => sum + (fine.fineAmount || 0),
-        0
+        0,
       );
       const activeFines = unpaidFines.length;
       const totalPaidFines = paidFines.length;
@@ -3082,7 +3068,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const dueDate = new Date(fine.dueDate);
         const today = new Date();
         const overdueDays = Math.ceil(
-          (today - dueDate) / (1000 * 60 * 60 * 24)
+          (today - dueDate) / (1000 * 60 * 60 * 24),
         );
 
         return {
@@ -3111,7 +3097,7 @@ document.addEventListener("DOMContentLoaded", () => {
           totalPaidFines,
           totalCollected: paidFines.reduce(
             (sum, fine) => sum + (fine.fineAmount || 0),
-            0
+            0,
           ),
         },
       };
@@ -3141,10 +3127,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Update the overview cards
     const totalUnpaidElement = document.querySelector(
-      ".overview-card.unpaid p"
+      ".overview-card.unpaid p",
     );
     const activeFinesElement = document.querySelector(
-      ".overview-card.active p"
+      ".overview-card.active p",
     );
     const paidFinesElement = document.querySelector(".overview-card.paid p");
     const totalAmountElement = document.querySelector(".total-amount");
@@ -3243,12 +3229,12 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       if (
         confirm(
-          `Are you sure you want to mark the fine for "${bookTitle}" as paid? This will also return the book.`
+          `Are you sure you want to mark the fine for "${bookTitle}" as paid? This will also return the book.`,
         )
       ) {
         // Disable button during processing
         const button = document.querySelector(
-          `.mark-paid[data-fine-id="${fineId}"]`
+          `.mark-paid[data-fine-id="${fineId}"]`,
         );
         const originalText = button.textContent;
         button.disabled = true;
@@ -3256,10 +3242,10 @@ document.addEventListener("DOMContentLoaded", () => {
         button.style.opacity = "0.6";
 
         const response = await makeAuthenticatedRequest(
-          `http://localhost:3500/api/librarian/fines/${fineId}/paid`,
+          `/api/librarian/fines/${fineId}/paid`,
           {
             method: "PUT",
-          }
+          },
         );
 
         if (!response.ok) {
@@ -3273,7 +3259,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loadFinesData();
 
         alert(
-          "✅ Fine marked as paid successfully! The book has been returned."
+          "✅ Fine marked as paid successfully! The book has been returned.",
         );
       }
     } catch (error) {
@@ -3282,7 +3268,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Re-enable button on error
       const button = document.querySelector(
-        `.mark-paid[data-fine-id="${fineId}"]`
+        `.mark-paid[data-fine-id="${fineId}"]`,
       );
       if (button) {
         button.disabled = false;
@@ -3312,9 +3298,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Use the same method as loadFinesData
-      const response = await makeAuthenticatedRequest(
-        "http://localhost:3500/api/librarian/fines"
-      );
+      const response = await makeAuthenticatedRequest("/api/librarian/fines");
 
       if (!response.ok) {
         throw new Error("Failed to search fines");
@@ -3345,7 +3329,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const filteredSummary = {
         totalUnpaid: filteredFines.reduce(
           (sum, fine) => sum + (fine.fineAmount || 0),
-          0
+          0,
         ),
         activeFines: filteredFines.length,
         totalPaidFines: allFines.filter((fine) => fine.status === "paid")
@@ -3417,7 +3401,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (viewParam) {
       // Find and click the corresponding nav link
       const targetLink = document.querySelector(
-        `.nav-link[data-view="${viewParam}"]`
+        `.nav-link[data-view="${viewParam}"]`,
       );
       if (targetLink) {
         targetLink.click();
@@ -3432,7 +3416,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Search functionality for Manage Books
   const manageBooksSearchInput = document.querySelector(
-    '#manageBooks input[type="text"]'
+    '#manageBooks input[type="text"]',
   );
   if (manageBooksSearchInput) {
     let searchTimeout;
@@ -3457,7 +3441,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // Returns search functionality
   const returnsSearchInput = document.querySelector(
-    '#returns input[type="text"]'
+    '#returns input[type="text"]',
   );
   if (returnsSearchInput) {
     let searchTimeout;
@@ -3538,7 +3522,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!bookId) {
         alert(
-          "❌ Error: No book selected. Please close the modal and try again."
+          "❌ Error: No book selected. Please close the modal and try again.",
         );
         return;
       }
@@ -3566,15 +3550,15 @@ document.addEventListener("DOMContentLoaded", () => {
         "🔄 Sending update for user:",
         originalUserId,
         "Data:",
-        userData
+        userData,
       );
 
       const response = await makeAuthenticatedRequest(
-        `http://localhost:3500/api/librarian/users/${originalUserId}`,
+        `/api/librarian/users/${originalUserId}`,
         {
           method: "PUT",
           body: JSON.stringify(userData),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -3613,7 +3597,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Show specific error messages
       if (error.message.includes("User with this ID already exists")) {
         alert(
-          "❌ A user with this ID already exists. Please use a different ID."
+          "❌ A user with this ID already exists. Please use a different ID.",
         );
       } else if (error.message.includes("User not found")) {
         alert("❌ User not found. The user may have been deleted.");
@@ -3646,7 +3630,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(`🔍 Setting up edit button ${index + 1}:`, button);
       console.log(
         `📋 Button data-user-id:`,
-        button.getAttribute("data-user-id")
+        button.getAttribute("data-user-id"),
       );
 
       button.addEventListener("click", async (e) => {
@@ -3694,15 +3678,15 @@ document.addEventListener("DOMContentLoaded", () => {
               console.log("🔍 Form verification after modal open:");
               console.log(
                 "  - Hidden field:",
-                document.getElementById("editUserId")?.value
+                document.getElementById("editUserId")?.value,
               );
               console.log(
                 "  - Student ID:",
-                document.getElementById("editStudentId")?.value
+                document.getElementById("editStudentId")?.value,
               );
               console.log(
                 "  - Name:",
-                document.getElementById("editUserName")?.value
+                document.getElementById("editUserName")?.value,
               );
             }, 100);
           } else {
@@ -3745,12 +3729,12 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(
       `✅ Total edit buttons initialized: ${
         document.querySelectorAll(".edit-user").length
-      }`
+      }`,
     );
     console.log(
       `✅ Total delete buttons initialized: ${
         document.querySelectorAll(".delete-user:not(.disabled)").length
-      }`
+      }`,
     );
     console.log("🔄 ========== INITIALIZE USER EVENTS END ==========");
   }

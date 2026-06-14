@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         const response = await makeAuthenticatedRequest(
-          "http://localhost:3500/api/librarian/books",
+          "/api/librarian/books",
           {
             method: "POST",
             body: JSON.stringify({
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
               isbn,
               department,
             }),
-          }
+          },
         );
 
         // Handle different response statuses
@@ -156,14 +156,14 @@ document.addEventListener("DOMContentLoaded", () => {
           // Book with same ISBN already exists
           const errorData = await response.json();
           throw new Error(
-            errorData.message || "A book with this ISBN already exists"
+            errorData.message || "A book with this ISBN already exists",
           );
         }
 
         if (!response.ok) {
           const errorText = await response.text();
           throw new Error(
-            `Failed to add book: ${response.status} - ${errorText}`
+            `Failed to add book: ${response.status} - ${errorText}`,
           );
         }
 
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
           error.message.includes("409")
         ) {
           alert(
-            "❌ Book Addition Failed:\nA book with this ISBN already exists in the system.\n\nPlease use a different ISBN number."
+            "❌ Book Addition Failed:\nA book with this ISBN already exists in the system.\n\nPlease use a different ISBN number.",
           );
         } else {
           alert("Error adding book: " + error.message);
