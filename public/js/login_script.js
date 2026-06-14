@@ -17,7 +17,7 @@ document
     }
 
     try {
-      const response = await fetch("fetch(`${window.API_BASE_URL}/auth`)", {
+      const response = await fetch("/auth", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
